@@ -8,6 +8,6 @@ class PrincipalController extends Controller
 {
     //
     public function index(Request $request) {
-        return 'Principal Controller';
+        return view('site.principal');
     } 
 }
