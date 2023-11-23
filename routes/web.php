@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\PrincipalController::class, 'index']);
 
-Route::get('/sobrenos', function () {
-    return 'PAGINA SOBRENOS';
-});
+Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index']);
 
-Route::get('/contato', function() {
-    return 'ROTA CONTATO';
-});
+Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index']);
