@@ -18,3 +18,7 @@ Route::get('/', [App\Http\Controllers\PrincipalController::class, 'index']);
 Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index']);
 
 Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index']);
+
+Route::get('/contato/{nome}', function(string $nome) {
+    echo "Estamos aqui $nome";
+});
