@@ -19,6 +19,21 @@ Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index'
 
 Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])->name('site.contato');
 
+Route::get('/login', function() {
+    return 'login';
+});
+
+Route::get('/clientes', function() {
+    return 'clientes';
+});
+
+Route::get('/fornecedores', function() {
+    return 'fornecedores';
+});
+
+Route::get('/produtos', function() {
+    return 'produtos';
+});
 /*
     Aula sobre parametrização dentro das rotas
 
@@ -35,8 +50,12 @@ Route::get('/contato/{nome}/{assunto?}', function(string $nome, string $assunto 
 });
 */
 
+/*
+    Aula sobre rotas com Regex
+
 Route::get('/contato/{nome}/{categoria_id}', function(string $nome = 'Desconhecido', int $categoria_id = 1) {
     echo "Estamos aqui: $nome - $categoria_id";
 })
     ->where('categoria_id', '[0-9]+')
     ->where('nome', '[A-Za-z]+');
+*/
