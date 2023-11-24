@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\PrincipalController::class, 'index']);
+Route::get('/', [App\Http\Controllers\PrincipalController::class, 'index'])->name('site.principal');
 
-Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index']);
+Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index'])->name('site.sobrenos');
 
-Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index']);
+Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])->name('site.contato');
 
 /*
     Aula sobre parametrização dentro das rotas
@@ -39,4 +39,4 @@ Route::get('/contato/{nome}/{categoria_id}', function(string $nome = 'Desconheci
     echo "Estamos aqui: $nome - $categoria_id";
 })
     ->where('categoria_id', '[0-9]+')
-    ->where('nome', '[a-zA-Z]+');
+    ->where('nome', '[A-Za-z]+');
