@@ -39,6 +39,9 @@ Route::prefix('app')->group(function () {
 
 });
 
+Route::fallback(function() {
+    echo 'A rota acessada não existe. <a href="'.route('site.principal').'">Clique aqui</a> para ir à página inicial.';
+});
 /*
     Aula sobre parametrização dentro das rotas
 
