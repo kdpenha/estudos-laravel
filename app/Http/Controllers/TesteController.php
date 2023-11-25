@@ -8,6 +8,7 @@ class TesteController extends Controller
 {
     //
     public function teste(Request $request, int $p1, int $p2) {
-        echo $p1. ' '. $p2;
+
+        return view('site.teste', compact('p1','p2'));
     }
 }
