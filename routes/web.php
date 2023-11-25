@@ -29,9 +29,7 @@ Route::prefix('app')->group(function () {
         return 'clientes';
     })->name('app.clientes');
     
-    Route::get('/fornecedores', function() {
-        return 'fornecedores';
-    })->name('app.fornecedores');
+    Route::get('/fornecedores', [App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedores');
     
     Route::get('/produtos', function() {
         return 'produtos';
@@ -39,7 +37,11 @@ Route::prefix('app')->group(function () {
 
 });
 
+/*
+    Aula sobre parametros para os controllers
+
 Route::get('teste/{p1}/{p2}',[App\Http\Controllers\TesteController::class, 'teste'])->name('teste');
+*/
 
 Route::fallback(function() {
     echo 'A rota acessada não existe. <a href="'.route('site.principal').'">Clique aqui</a> para ir à página inicial.';
