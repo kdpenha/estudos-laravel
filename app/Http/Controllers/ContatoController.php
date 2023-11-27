@@ -8,6 +8,9 @@ class ContatoController extends Controller
 {
     //
     public function index(Request $request) {
-        return view('site.contato');
+
+        $titulo_pagina = 'Contato';
+
+        return view('site.contato', compact('titulo_pagina'));
     }
 }

@@ -8,6 +8,8 @@ class PrincipalController extends Controller
 {
     //
     public function index(Request $request) {
-        return view('site.principal');
+        $titulo_pagina = 'Principal';
+
+        return view('site.principal', compact('titulo_pagina'));
     } 
 }
