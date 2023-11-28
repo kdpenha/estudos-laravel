@@ -11,6 +11,8 @@ class ContatoController extends Controller
 
         $titulo_pagina = 'Contato';
 
+        var_dump($_POST);
+
         return view('site.contato', compact('titulo_pagina'));
     }
 }
