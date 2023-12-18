@@ -17,5 +17,22 @@ class ContatoController extends Controller
         return view('site.contato', compact('titulo_pagina'));
     }
 
+    public function salvar(Request $request) {
+
+        //validar o request
+
+        $chaves = [
+            'nome' => 'required',
+            'telefone' => 'required',
+            'email' => 'required',
+            'motivo_contato' => 'required',
+            'mensagem' => 'required'
+        ];
+
+        $request->validate($chaves);        
+
+        //SiteContato::create($request->all());
+    }
+
 
 }
