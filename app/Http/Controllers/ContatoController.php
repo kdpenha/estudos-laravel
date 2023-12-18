@@ -22,11 +22,11 @@ class ContatoController extends Controller
         //validar o request
 
         $chaves = [
-            'nome' => 'required',
+            'nome' => 'required|min:3|max:40',
             'telefone' => 'required',
             'email' => 'required',
             'motivo_contato' => 'required',
-            'mensagem' => 'required'
+            'mensagem' => 'required|max:2000'
         ];
 
         $request->validate($chaves);        
