@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\SiteContato;
 
 class ContatoController extends Controller
 {
@@ -11,8 +12,10 @@ class ContatoController extends Controller
 
         $titulo_pagina = 'Contato';
 
-        var_dump($_POST);
+        //SiteContato::create($request->all());
 
         return view('site.contato', compact('titulo_pagina'));
     }
+
+
 }
