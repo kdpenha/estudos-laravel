@@ -12,9 +12,15 @@ class ContatoController extends Controller
 
         $titulo_pagina = 'Contato';
 
+        $motivo_contatos = [
+            '1' => 'Duvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação'
+        ];
+
         //SiteContato::create($request->all());
 
-        return view('site.contato', compact('titulo_pagina'));
+        return view('site.contato', compact('titulo_pagina', 'motivo_contatos'));
     }
 
     public function salvar(Request $request) {
