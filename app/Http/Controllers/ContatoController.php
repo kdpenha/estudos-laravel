@@ -31,10 +31,14 @@ class ContatoController extends Controller
         ];
 
         $feedbacks = [
-            
+            'required' => 'O campo é obrigatório',
+            'min' => 'É obrigatório ter no mínimo :min caracteres',
+            'max' => 'É obrigatório ter no máximo :max caracteres',
+            'email' => 'Deve ser um e-mail válido',
+            'unique' => 'O nome informado ja esta em uso'
         ];
 
-        $request->validate($chaves);
+        $request->validate($chaves, $feedbacks);
 
         SiteContato::create($request->all());
 

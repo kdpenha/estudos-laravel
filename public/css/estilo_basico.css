@@ -187,3 +187,7 @@ button:hover {
 .redes-sociais img {
     margin: 0px 15px 0px 15px;
 }
+
+.erro-form {
+    background-color: rgb(209, 79, 79);
+}
