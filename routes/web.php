@@ -23,7 +23,7 @@ Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index'
 Route::middleware(LogAcessoMiddleware::class)
     ->get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])
     ->name('site.contato');
-    
+
 Route::post('/contato',[App\Http\Controllers\ContatoController::class, 'salvar'])->name('site.contato');
 
 Route::get('/login', function() {
@@ -51,7 +51,7 @@ Route::get('teste/{p1}/{p2}',[App\Http\Controllers\TesteController::class, 'test
 */
 
 Route::fallback(function() {
-    echo 'A rota acessada não existe. <a href="'.route('site.principal').'">Clique aqui</a> para ir à página inicial.';
+    echo 'A rota acessada não existe. <a href="'.route('site.index').'">Clique aqui</a> para ir à página inicial.';
 });
 
 /*
