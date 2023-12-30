@@ -30,6 +30,10 @@ class ContatoController extends Controller
             'mensagem' => 'required|max:2000'
         ];
 
+        $feedbacks = [
+            
+        ];
+
         $request->validate($chaves);
 
         SiteContato::create($request->all());

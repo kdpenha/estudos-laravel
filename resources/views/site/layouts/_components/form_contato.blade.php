@@ -25,9 +25,10 @@
     <button type="submit" class="borda-preta">ENVIAR</button>
     {{$slot}}
 </form>
-
-<div style="width:100%; background:red;">
-    <pre>
-        {{print_r($errors)}}
-    </pre>
-</div>
+@if($errors->any())
+    <div style="width:100%; background:red;">
+        @foreach($errors->all() as $erro)
+            {{$erro}}
+        @endforeach
+    </div>
+@endif
