@@ -27,7 +27,7 @@ Route::get('/login', function() {
     return 'login';
 })->name('site.login');
 
-Route::middleware('autenticacao')
+Route::middleware('autenticacao:padrao,visitante')
     ->prefix('app')
     ->group(function() {
 
