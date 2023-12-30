@@ -18,7 +18,7 @@ class LogAcessoMiddleware
     {
         //return $next($request);
 
-        $ip = Request::ip();
+        $ip = \Request::ip();
         $rota = $request->getRequestUri();
         
         LogAcesso::create(['log' => "IP $ip requisitou a rota $rota"]);
