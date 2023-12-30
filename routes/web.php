@@ -27,7 +27,7 @@ Route::get('/login', function() {
     return 'login';
 })->name('site.login');
 
-Route::middleware('log.acesso', 'autenticacao')
+Route::middleware('autenticacao')
     ->prefix('app')
     ->group(function() {
 
