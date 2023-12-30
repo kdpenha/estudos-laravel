@@ -14,14 +14,12 @@ use App\Http\Middleware\LogAcessoMiddleware;
 |
 */
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/', [App\Http\Controllers\PrincipalController::class, 'index'])
+Route::get('/', [App\Http\Controllers\PrincipalController::class, 'index'])
     ->name('site.index');
 
 Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index'])->name('site.sobrenos');
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])
+Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])
     ->name('site.contato');
 
 Route::post('/contato',[App\Http\Controllers\ContatoController::class, 'salvar'])->name('site.contato');
