@@ -1,10 +1,19 @@
 <form action="{{route('site.contato')}}" method="post">
     @csrf
     <input name="nome" type="text" placeholder="Nome" class="{{$borda}}" value="{{old('nome')}}">
+    @error('nome')
+        {{$message}}
+    @endError
     <br>
     <input name="telefone" type="text" placeholder="Telefone" class="{{$borda}}" value="{{old('telefone')}}">
+    @error('telefone')
+        {{$message}}
+    @endError
     <br>
     <input name="email" type="text" placeholder="E-mail" class="{{$borda}}" value="{{old('email')}}">
+    @error('email')
+        {{$message}}
+    @endError
     <br>
     <select name="motivo_contato_id" class="{{$borda}}">
         <option value="">Qual o motivo do contato?</option>
@@ -18,9 +27,15 @@
         <option value="3" {{old('motivo_contato') == 3 ? 'selected' : ''}}>Reclamação</option>
         --}}
     </select>
+    @error('motivo_contato_id')
+        {{$message}}
+    @endError
     <br>
     <textarea name="mensagem" class="{{$borda}}">{{(old('mensagem') != '') ? old('mensagem') : 'Preencha aqui sua mensagem.'}}
     </textarea>
+    @error('mensagem')
+        {{$message}}
+    @endError
     <br>
     <button type="submit" class="borda-preta">ENVIAR</button>
     {{$slot}}
