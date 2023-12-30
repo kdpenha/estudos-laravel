@@ -15,9 +15,7 @@ use App\Http\Middleware\LogAcessoMiddleware;
 */
 
 Route::get('/', [App\Http\Controllers\PrincipalController::class, 'index'])
-    ->name('site.index')
-    ->middleware('log.acesso');
-
+    ->name('site.index');
 Route::get('/sobrenos', [App\Http\Controllers\SobreNosController::class, 'index'])->name('site.sobrenos');
 
 Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])
@@ -29,19 +27,22 @@ Route::get('/login', function() {
     return 'login';
 })->name('site.login');
 
-Route::prefix('app')->group(function () {
+Route::middleware('log.acesso', 'autenticacao')
+    ->prefix('app')
+    ->group(function() {
 
-    Route::get('/clientes', function() {
-        return 'clientes';
-    })->name('app.clientes');
-    
-    Route::get('/fornecedores', [App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedores');
-    
-    Route::get('/produtos', function() {
-        return 'produtos';
-    })->name('app.produtos');
+        Route::get('/clientes', function() {
+            return 'clientes';
+        })->name('app.clientes');
+        
+        Route::get('/fornecedores', [App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedores');
+        
+        Route::get('/produtos', function() {
+            return 'produtos';
+        })->name('app.produtos');
 
-});
+    }
+);
 
 /*
     Aula sobre parametros para os controllers
