@@ -23,7 +23,7 @@ class ContatoController extends Controller
         //validar o request
 
         $chaves = [
-            'nome' => 'required|min:3|max:40',
+            'nome' => 'required|min:3|max:40|unique:site_contatos',
             'telefone' => 'required',
             'email' => 'email',
             'motivo_contato_id' => 'required',
