@@ -24,6 +24,7 @@
                         @enderror
                         <button type="submit" class="borda-preta">Acessar</button>
                     </form>
+                    {{ isset($erro) && $erro != '' ? 'Verifique as credenciais e tente novamente' : '' }}
                 </div>
             </div>  
         </div>

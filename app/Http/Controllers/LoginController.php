@@ -8,9 +8,15 @@ use App\Models\User;
 class LoginController extends Controller
 {
     //
-    public function index() {
+    public function index(Request $request) {
+        
+        $erro = '';
 
-        return view('site.login', ['titulo_pagina' => 'Login']);
+        if($request->get('erro') == 1) {
+            $erro = 'Verifique as credenciais e tente novamente';
+        }
+
+        return view('site.login', ['titulo_pagina' => 'Login', 'erro' => $erro]);
     }
 
     public function autenticar(Request $request) {
