@@ -41,8 +41,8 @@ Route::middleware('autenticacao:padrao,visitante')
             return 'produtos';
         })->name('app.produtos');
 
-    }
-);
+        }
+    );
 
 /*
     Aula sobre parametros para os controllers
