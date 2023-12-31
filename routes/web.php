@@ -23,7 +23,7 @@ Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])
 
 Route::post('/contato',[App\Http\Controllers\ContatoController::class, 'salvar'])->name('site.contato');
 
-Route::get('/login', [App\Http\Controllers\LoginController::class, 'index'])
+Route::get('/login/{erro?}', [App\Http\Controllers\LoginController::class, 'index'])
     ->name('site.login');
     Route::post('/login', [App\Http\Controllers\LoginController::class, 'autenticar'])
     ->name('site.login');
