@@ -11,4 +11,8 @@ class LoginController extends Controller
 
         return view('site.login', ['titulo_pagina' => 'Login']);
     }
+
+    public function autenticar() {
+        
+    }
 }
