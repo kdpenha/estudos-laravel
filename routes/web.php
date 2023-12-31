@@ -23,9 +23,8 @@ Route::get('/contato', [App\Http\Controllers\ContatoController::class, 'index'])
 
 Route::post('/contato',[App\Http\Controllers\ContatoController::class, 'salvar'])->name('site.contato');
 
-Route::get('/login', function() {
-    return 'login';
-})->name('site.login');
+Route::get('/login', [App\Http\Controller\LoginController::class, 'index'])
+    ->name('site.login');
 
 Route::middleware('autenticacao:padrao,visitante')
     ->prefix('app')
