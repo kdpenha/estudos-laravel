@@ -40,9 +40,7 @@ Route::middleware('autenticacao:padrao,visitante')
         
         Route::get('/fornecedor', [App\Http\Controllers\FornecedorController::class, 'index'])->name('app.fornecedor');
         
-        Route::get('/produto', function() {
-            return 'produtos';
-        })->name('app.produto');
+        Route::get('/produto', [App\Http\Controllers\ProdutoController::class, 'index'])->name('app.produto');
 
         }
     );
