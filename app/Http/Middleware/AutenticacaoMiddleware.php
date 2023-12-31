@@ -15,10 +15,8 @@ class AutenticacaoMiddleware
      */
     public function handle(Request $request, Closure $next, $metodo_autenticacao, $perfil): Response
     {
-
-        session_start();
-        
-        if($_SESSION['email'] && $_SESSION['email'] != '') {
+   
+        if(session()->get('email') !== null && session()->get('email') != '') {
             return $next($request);
         } else {
             return redirect()->route('site.login', ['erro' => 2]);

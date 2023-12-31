@@ -14,6 +14,8 @@ class LoginController extends Controller
 
         if($request->get('erro') == 1) {
             $erro = 'Verifique as credenciais e tente novamente';
+        } else if($request->get('erro') == 2) {
+            $erro = 'Necessario realizar login para acessar a pagina';
         }
 
         return view('site.login', ['titulo_pagina' => 'Login', 'erro' => $erro]);
@@ -48,10 +50,9 @@ class LoginController extends Controller
                     ->first();
         
         if(isset($usuario->name)) {
-            
-            session_start();
-            $_SESSION['nome'] = $usuario->name;
-            $_SESSION['email'] = $usuario->email;
+
+            session()->put('nome', $usuario->name);
+            session(['email' => $usuario->email]);
 
             return redirect()->route('app.clientes');
         } else {
