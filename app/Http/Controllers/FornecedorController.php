@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Fornecedor;
 
 class FornecedorController extends Controller
 {
@@ -35,8 +36,16 @@ class FornecedorController extends Controller
 
             $request->validate($regras, $feedbacks);
 
-            echo 'chegamos aqui';
+            Fornecedor::create($request->all());
+
+            return redirect()->route('app.fornecedor.adicionar', ['cadastro'=> 'sucesso']);
         }
+
+        $msg = 'Cadastro realizado com sucesso';
+        if($request->get('cadastro') != null && $request->get('cadastro') == 'sucesso') {
+            return view('app.fornecedor.adicionar', compact('msg'));
+        }
+
         return view('app.fornecedor.adicionar');
     }
 }

@@ -20,12 +20,37 @@
             <div style="width:30%; margin-left:auto; margin-right:auto;">
                 <form action="{{route('app.fornecedor.adicionar')}}" method="post">
                     @csrf
-                    <input type="text" name="nome" placeholder="Nome" class="borda-preta">
-                    <input type="text" name="site" placeholder="Site" class="borda-preta">
-                    <input type="text" name="uf" placeholder="UF" class="borda-preta">
-                    <input type="text" name="email" placeholder="E-mail" class="borda-preta">
+                    <input type="text" name="nome" value="{{old('nome')}}" placeholder="Nome" class="borda-preta">
+                        <div style="color:red;">
+                            @error('nome')
+                            {{$message}}
+                            @enderror
+                        </div>
+                    <input type="text" name="site" placeholder="Site" value="{{old('site')}}" class="borda-preta">
+                        <div style="color:red;">
+                            @error('nome')
+                            {{$message}}
+                            @enderror
+                        </div>
+                    <input type="text" name="uf" placeholder="UF" value="{{old('uf')}}" class="borda-preta">
+                        <div style="color:red;">
+                            @error('nome')
+                            {{$message}}
+                            @enderror
+                        </div>
+                    <input type="text" name="email" placeholder="E-mail" value="{{old('email')}}" class="borda-preta">
+                        <div style="color:red;">
+                            @error('nome')
+                            {{$message}}
+                            @enderror
+                        </div>
                     <button type="submit" class="borda-preta">Cadastrar</button>
                 </form>
+                @if (isset($msg) && $msg != '')
+                    <div style="color:green">
+                        {{$msg}}
+                    </div>                      
+                @endif
             </div>
         </div>
     </div>
