@@ -8,6 +8,6 @@ class FornecedorController extends Controller
 {
     //
     public function index(Request $request) {
-        return view('app.fornecedor');
+        return view('app.fornecedor.index');
     }
 }
