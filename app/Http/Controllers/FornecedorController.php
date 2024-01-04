@@ -51,4 +51,8 @@ class FornecedorController extends Controller
 
         return view('app.fornecedor.adicionar', compact('msg'));
     }
+
+    public function editar(Request $request) {
+        
+    }
 }
