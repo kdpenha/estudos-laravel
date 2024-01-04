@@ -52,7 +52,7 @@ class FornecedorController extends Controller
         return view('app.fornecedor.adicionar', compact('msg'));
     }
 
-    public function editar(Request $request) {
-        echo 'chegamos ate aq';Route::get('/fornecedor/adicionar', [App\Http\Controllers\FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
+    public function editar(Request $request, $id) {
+        echo $id;
     }
 }
