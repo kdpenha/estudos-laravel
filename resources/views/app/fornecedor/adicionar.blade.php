@@ -20,25 +20,25 @@
             <div style="width:30%; margin-left:auto; margin-right:auto;">
                 <form action="{{route('app.fornecedor.adicionar')}}" method="post">
                     @csrf
-                    <input type="text" name="nome" value="{{old('nome')}}" placeholder="Nome" class="borda-preta">
+                    <input type="text" name="nome" value="{{$fornecedor->nome ?? old('nome')}}" placeholder="Nome" class="borda-preta">
                         <div style="color:red;">
                             @error('nome')
                             {{$message}}
                             @enderror
                         </div>
-                    <input type="text" name="site" placeholder="Site" value="{{old('site')}}" class="borda-preta">
+                    <input type="text" name="site" placeholder="Site" value="{{$fornecedor->site ?? old('site')}}" class="borda-preta">
                         <div style="color:red;">
                             @error('nome')
                             {{$message}}
                             @enderror
                         </div>
-                    <input type="text" name="uf" placeholder="UF" value="{{old('uf')}}" class="borda-preta">
+                    <input type="text" name="uf" placeholder="UF" value="{{$fornecedor->uf ?? old('uf')}}" class="borda-preta">
                         <div style="color:red;">
                             @error('nome')
                             {{$message}}
                             @enderror
                         </div>
-                    <input type="text" name="email" placeholder="E-mail" value="{{old('email')}}" class="borda-preta">
+                    <input type="text" name="email" placeholder="E-mail" value="{{$fornecedor->email ?? old('email')}}" class="borda-preta">
                         <div style="color:red;">
                             @error('nome')
                             {{$message}}
