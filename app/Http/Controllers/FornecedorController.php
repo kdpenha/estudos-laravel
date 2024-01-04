@@ -18,6 +18,8 @@ class FornecedorController extends Controller
     
     public function adicionar(Request $request) {
 
+        $msg = '';
+        
         if($request->input('_token') != '') {
             //validar
             $regras = [
@@ -36,16 +38,11 @@ class FornecedorController extends Controller
 
             $request->validate($regras, $feedbacks);
 
-            Fornecedor::create($request->all());
+             Fornecedor::create($request->all());
 
-            return redirect()->route('app.fornecedor.adicionar', ['cadastro'=> 'sucesso']);
+            $msg = 'Cadastro realizado com sucesso';
         }
 
-        $msg = 'Cadastro realizado com sucesso';
-        if($request->get('cadastro') != null && $request->get('cadastro') == 'sucesso') {
-            return view('app.fornecedor.adicionar', compact('msg'));
-        }
-
-        return view('app.fornecedor.adicionar');
+        return view('app.fornecedor.adicionar', compact('msg'));
     }
 }
