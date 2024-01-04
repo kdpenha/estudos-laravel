@@ -53,6 +53,6 @@ class FornecedorController extends Controller
     }
 
     public function editar(Request $request, $id) {
-        echo $id;
+        $fornecedor = Fornecedor::find($id);
     }
 }
