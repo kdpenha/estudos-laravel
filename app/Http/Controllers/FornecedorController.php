@@ -53,6 +53,6 @@ class FornecedorController extends Controller
     }
 
     public function editar(Request $request) {
-        
+        echo 'chegamos ate aq';Route::get('/fornecedor/adicionar', [App\Http\Controllers\FornecedorController::class, 'adicionar'])->name('app.fornecedor.adicionar');
     }
 }
