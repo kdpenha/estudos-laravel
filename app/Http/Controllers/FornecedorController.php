@@ -26,7 +26,7 @@ class FornecedorController extends Controller
 
         $msg = '';
         
-        if($request->input('_token') != '') {
+        if($request->input('_token') != '' && $request->input('id') == '') {
             //validar
             $regras = [
                 'nome' => 'required|min:3|max:40',
@@ -47,6 +47,19 @@ class FornecedorController extends Controller
              Fornecedor::create($request->all());
 
             $msg = 'Cadastro realizado com sucesso';
+        }
+
+        //edicao
+        if($request->input('_token') != '' && $request->input('id') != '') {
+            
+            $fornecedor = Fornecedor::find($request->input('id'));
+            $update = $fornecedor->update($request->all());
+
+            if($update) {
+                $msg = 'Atualizacao realizada com sucesso';                
+            } else {
+                $msg = 'Atualizacao falhou';
+            }
         }
 
         return view('app.fornecedor.adicionar', compact('msg'));
