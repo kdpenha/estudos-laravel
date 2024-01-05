@@ -18,7 +18,7 @@ class FornecedorController extends Controller
             ->where('site', 'like', '%'.$request->input('site').'%')
             ->where('uf', 'like', '%'.$request->input('uf').'%')
             ->where('email', 'like', '%'.$request->input('email').'%')
-            ->get();
+            ->cursorPaginate(1);
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
     }
     
@@ -60,14 +60,16 @@ class FornecedorController extends Controller
             } else {
                 $msg = 'Atualizacao falhou';
             }
+
+            return redirect()->route('app.fornecedor.editar', ['id' => $request->input('id'), 'msg' => $msg]);
         }
 
         return view('app.fornecedor.adicionar', compact('msg'));
     }
 
-    public function editar(Request $request, $id) {
+    public function editar(Request $request, $id, $msg = '') {
         $fornecedor = Fornecedor::find($id);
 
-        return view('app.fornecedor.adicionar', compact('fornecedor'));
+        return view('app.fornecedor.adicionar', compact('fornecedor', 'msg'));
     }
 }

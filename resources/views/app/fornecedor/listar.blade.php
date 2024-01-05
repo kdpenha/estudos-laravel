@@ -43,6 +43,8 @@
                             @endforeach
                         </tbody>
                     </table>
+
+                    {{$fornecedores->links()}}
             </div>
         </div>
     </div>
