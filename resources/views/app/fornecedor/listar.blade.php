@@ -46,7 +46,12 @@
 
                     {{$fornecedores->appends($request->all())->links()}}
 
-                    
+                    <!--<p>Total de registros por pagina: {{$fornecedores->count()}}</p>
+                    <p>Total de registros: {{$fornecedores->total()}}</p>
+                    <p>Numero do primeiro registro da pagina: {{$fornecedores->firstItem()}}</p>
+                    <p>Numero do ultimo registro da pagina: {{$fornecedores->lastItem()}}</p>-->
+
+                    <p>Exibindo {{$fornecedores->count()}} registros de {{$fornecedores->total()}}</p>
             </div>
         </div>
     </div>
