@@ -10,9 +10,12 @@ class ProdutoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //listar registros
+        $produtos = Produto::paginate(10);
+        
+        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request]);
     }
 
     /**
@@ -21,6 +24,7 @@ class ProdutoController extends Controller
     public function create()
     {
         //
+        echo 'create';
     }
 
     /**

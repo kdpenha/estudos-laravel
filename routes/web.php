@@ -46,7 +46,9 @@ Route::middleware('autenticacao:padrao,visitante')
         Route::get('/fornecedor/editar/{id}/{msg?}', [App\Http\Controllers\FornecedorController::class, 'editar'])->name('app.fornecedor.editar');
         Route::get('/fornecedor/excluir/{id}', [App\Http\Controllers\FornecedorController::class, 'excluir'])->name('app.fornecedor.excluir');
         
-        Route::get('/produto', [App\Http\Controllers\ProdutoController::class, 'index'])->name('app.produto');
+        //Route::get('/produto', [App\Http\Controllers\ProdutoController::class, 'index'])->name('app.produto');
+        //rota produto com resource para evitar esses codigos acima
+        Route::resource('produto', App\Http\Controllers\ProdutoController::class);
 
         }
     );
