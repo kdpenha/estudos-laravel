@@ -18,15 +18,29 @@
 
         <div class="informacao-pagina">
             <div style="width:30%; margin-left:auto; margin-right:auto;">
-                <form action="" method="post">
-                    
+                <form action="{{route('produto.store')}}" method="post">
                     @csrf
                     <input type="text" name="nome" value="" placeholder="Nome" class="borda-preta">
+                    <div style="color:red;">
+                        @error('nome')
+                            {{$message}}
+                        @enderror   
+                    </div>
 
                     <input type="text" name="descricao" placeholder="Descricao" value="" class="borda-preta">
-                        
+                    <div style="color:red;">
+                        @error('descricao')
+                            {{$message}}
+                        @enderror   
+                    </div>
+                    
                     <input type="text" name="peso" placeholder="Peso" value="" class="borda-preta">
-                        
+                    <div style="color:red;">
+                        @error('peso')
+                            {{$message}}
+                        @enderror   
+                    </div>
+                    
                     <select name="unidade_id">
                         <option>-- Selecione a unidade de medida --</option>
             
@@ -34,14 +48,14 @@
                             <option value="{{$unidade->id}}">{{$unidade->descricao}}</option>                
                         @endforeach
                     </select>
+                    <div style="color:red;">
+                        @error('unidade_id')
+                            {{$message}}
+                        @enderror   
+                    </div>
                         
                     <button type="submit" class="borda-preta">Cadastrar</button>
                 </form>
-                @if (isset($msg) && $msg != '')
-                    <div style="color:green">
-                        {{$msg}}
-                    </div>                      
-                @endif
             </div>
         </div>
     </div>
