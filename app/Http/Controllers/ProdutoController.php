@@ -49,7 +49,7 @@ class ProdutoController extends Controller
             'min' => 'O campo deve ter no minimo :min caracteres',
             'max' => 'O campo deve ter no maximo :max caracteres',
             'integer' => 'O campo deve ser numero',
-            'exists' => 'A unidade nao existe'
+            'exists' => 'A unidade de medida informada nao existe'
         ];
 
         $request->validate($regras, $feedbacks);
@@ -64,6 +64,7 @@ class ProdutoController extends Controller
     public function show(Produto $produto)
     {
         //
+        
     }
 
     /**
