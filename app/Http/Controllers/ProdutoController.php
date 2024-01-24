@@ -63,8 +63,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
-        
+        return view('app.produto.show', ['produto' => $produto] );
     }
 
     /**
