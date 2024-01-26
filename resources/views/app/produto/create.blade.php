@@ -6,7 +6,7 @@
     
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>Adicionar produto</p>
+            <p>{{isset($produto->id) ? 'Editar produto' : 'Adicionar produto'}}</p>
         </div>
 
         <div class="menu">
@@ -18,23 +18,31 @@
 
         <div class="informacao-pagina">
             <div style="width:30%; margin-left:auto; margin-right:auto;">
-                <form action="{{route('produto.store')}}" method="post">
-                    @csrf
-                    <input type="text" name="nome" value="" placeholder="Nome" class="borda-preta">
+                
+                @if (isset($produto->id))
+                    <form action="{{route('produto.update', ['produto' => $produto->id])}}" method="post">
+                        @csrf
+                        @method('PUT')
+                @else
+                    <form action="{{route('produto.store')}}" method="post">
+                        @csrf
+                @endif
+
+                    <input type="text" name="nome" value="{{$produto->nome ?? old('nome')}}" placeholder="Nome" class="borda-preta">
                     <div style="color:red;">
                         @error('nome')
                             {{$message}}
                         @enderror   
                     </div>
 
-                    <input type="text" name="descricao" placeholder="Descricao" value="" class="borda-preta">
+                    <input type="text" name="descricao" placeholder="Descricao" value="{{$produto->descricao ?? old('descricao')}}" class="borda-preta">
                     <div style="color:red;">
                         @error('descricao')
                             {{$message}}
                         @enderror   
                     </div>
                     
-                    <input type="text" name="peso" placeholder="Peso" value="" class="borda-preta">
+                    <input type="text" name="peso" placeholder="Peso" value="{{$produto->peso ?? old('peso')}}" class="borda-preta">
                     <div style="color:red;">
                         @error('peso')
                             {{$message}}
@@ -45,7 +53,7 @@
                         <option>-- Selecione a unidade de medida --</option>
             
                         @foreach ($unidades as $unidade)
-                            <option value="{{$unidade->id}}">{{$unidade->descricao}}</option>                
+                            <option value="{{$unidade->id}}" {{ ($produto->unidade_id ?? old('unidade_id')) == $unidade->id ? 'selected' : ''  }}>{{$unidade->descricao}}</option>                
                         @endforeach
                     </select>
                     <div style="color:red;">
@@ -54,7 +62,7 @@
                         @enderror   
                     </div>
                         
-                    <button type="submit" class="borda-preta">Cadastrar</button>
+                    <button type="submit" class="borda-preta">{{isset($produto->id) ? 'Editar' : 'Cadastrar'}}</button>
                 </form>
             </div>
         </div>
