@@ -18,45 +18,8 @@
 
         <div class="informacao-pagina">
             <div style="width:30%; margin-left:auto; margin-right:auto;">
-                <form action="{{route('produto.update', ['produto' => $produto->id])}}" method="post">
-                    @csrf
-                    @method('PUT')
-                    <input type="text" name="nome" value="{{$produto->nome ?? old('nome')}}" placeholder="Nome" class="borda-preta">
-                    <div style="color:red;">
-                        @error('nome')
-                            {{$message}}
-                        @enderror   
-                    </div>
-
-                    <input type="text" name="descricao" placeholder="Descricao" value="{{$produto->descricao ?? old('descricao')}}" class="borda-preta">
-                    <div style="color:red;">
-                        @error('descricao')
-                            {{$message}}
-                        @enderror   
-                    </div>
-                    
-                    <input type="text" name="peso" placeholder="Peso" value="{{$produto->peso ?? old('peso')}}" class="borda-preta">
-                    <div style="color:red;">
-                        @error('peso')
-                            {{$message}}
-                        @enderror   
-                    </div>
-                    
-                    <select name="unidade_id">
-                        <option>-- Selecione a unidade de medida --</option>
-            
-                        @foreach ($unidades as $unidade)
-                            <option value="{{$unidade->id}}" {{ ($produto->unidade_id ?? old('unidade_id')) == $unidade->id ? 'selected' : ''}}>{{$unidade->descricao}}</option>                
-                        @endforeach
-                    </select>
-                    <div style="color:red;">
-                        @error('unidade_id')
-                            {{$message}}
-                        @enderror   
-                    </div>
-                        
-                    <button type="submit" class="borda-preta">Cadastrar</button>
-                </form>
+                @component('app.produto._components.form_create_edit', ['produto' => $produto, 'unidades' => $unidades])                    
+                @endcomponent
             </div>
         </div>
     </div>
