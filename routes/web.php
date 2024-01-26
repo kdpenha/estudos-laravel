@@ -50,6 +50,8 @@ Route::middleware('autenticacao:padrao,visitante')
         //rota produto com resource para evitar esses codigos acima
         Route::resource('produto', App\Http\Controllers\ProdutoController::class);
 
+        Route::resource('produto-detalhes', App\Http\Controllers\ProdutoDetalheController::class);
+
         }
     );
 
