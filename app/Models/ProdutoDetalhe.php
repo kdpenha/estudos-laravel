@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Produto;
 
 class ProdutoDetalhe extends Model
 {
@@ -16,4 +18,9 @@ class ProdutoDetalhe extends Model
         'altura', 
         'unidade_id'
     ];
+
+    public function produto(): BelongsTo
+    {
+        return $this->belongsTo(Produto::class, 'produto_id' , 'id');
+    }
 }

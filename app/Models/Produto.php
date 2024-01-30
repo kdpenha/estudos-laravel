@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Models\ProdutoDetalhe;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Produto extends Model
 {
@@ -12,7 +13,8 @@ class Produto extends Model
     
     protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id'];
 
-    public function produtoDetalhe() {
+    public function produtoDetalhe(): HasOne
+    {
         return $this->hasOne(ProdutoDetalhe::class, 'produto_id', 'id');
     }
 }
