@@ -19,11 +19,11 @@
 
             <h4>Produto</h4>
             <div>
-                Nome: {{ $produto_detalhe->produto->nome }}
+                Nome: {{ $produto_detalhe->item->nome }}
             </div>
             <br>
             <div>
-                Descricao: {{ $produto_detalhe->produto->descricao }}
+                Descricao: {{ $produto_detalhe->item->descricao }}
             </div>
 
             <div style="width:30%; margin-left:auto; margin-right:auto;">
