@@ -16,7 +16,7 @@
         </div>
 
         <div class="informacao-pagina">
-
+            {{ $produto_detalhe->toJson() }}
             <h4>Produto</h4>
             <div>
                 Nome: {{ $produto_detalhe->item->nome }}
