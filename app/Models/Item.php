@@ -13,7 +13,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'descricao', 'peso', 'unidade_id'];
+    protected $fillable = ['fornecedor_id','nome', 'descricao', 'peso', 'unidade_id'];
     protected $table = 'produtos';
 
     public function itemDetalhe(): HasOne 
@@ -24,5 +24,27 @@ class Item extends Model
     public function fornecedor(): BelongsTo
     {
         return $this->belongsTo(Fornecedor::class, 'fornecedor_id', 'id');
+    }
+
+    public static function validar($request)
+    {
+        $regras = [
+            'nome' => 'required|min:3|max:40',
+            'descricao' => 'required|min:3|max:40',
+            'peso' => 'required|integer',
+            'unidade_id' => 'exists:unidades,id',
+            'fornecedor_id' => 'exists:fornecedores,id'
+        ];
+
+        $feedbacks = [
+            'required' => 'O campo e obrigatorio',
+            'min' => 'O campo deve ter no minimo :min caracteres',
+            'max' => 'O campo deve ter no maximo :max caracteres',
+            'integer' => 'O campo deve ser numero',
+            'exists' => 'A unidade de medida informada nao existe',
+            'fornecedor_id.exists' => 'O fornecedor informado nao existe'
+        ];
+
+        return $request->validate($regras, $feedbacks);
     }
 }
