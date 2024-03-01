@@ -52,6 +52,10 @@ Route::middleware('autenticacao:padrao,visitante')
 
         Route::resource('produto-detalhe', App\Http\Controllers\ProdutoDetalheController::class);
 
+        Route::resource('cliente', App\Http\Controllers\ClienteController::class);
+        Route::resource('pedido', App\Http\Controllers\PedidoController::class);
+        Route::resource('pedido-produto', App\Http\Controllers\PedidoProdutoController::class);
+
         }
     );
 
