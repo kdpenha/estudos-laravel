@@ -21,7 +21,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('app.cliente.create');
     }
 
     /**
@@ -29,7 +29,21 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $regras = [
+            'nome' => 'required|min:3|max:40'
+        ];
+
+        $feedback = [
+            'required' => 'O campo :attribute deve ser preenchido',
+            'min' => 'O campo deve ter no minimo :min caracteres',
+            'max' => 'O campo deve ter no maximo :max caracteres'
+        ];
+
+        $request->validate($regras, $feedback);
+
+        Cliente::create($request->all());
+
+        return redirect()->route('cliente.index');
     }
 
     /**
@@ -43,9 +57,9 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Cliente $id)
     {
-        //
+        return view('app.cliente.edit', ['cliente' => $id]);
     }
 
     /**
