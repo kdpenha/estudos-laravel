@@ -23,6 +23,9 @@
                             <tr>
                                 <th>ID pedido</th>
                                 <th>Cliente</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
 
