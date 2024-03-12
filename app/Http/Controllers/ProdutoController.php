@@ -17,7 +17,7 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         //listar registros
-        $produtos = Item::with(['itemDetalhe', 'fornecedor'])->paginate(10);
+        $produtos = Item::with(['itemDetalhe', 'fornecedor', 'pedidos'])->paginate(10);
         //carregamento ansioso. ele passa junto com o relacionamento
 
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request]);

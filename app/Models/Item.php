@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Models\ItemDetalhe;
+use App\Models\Pedido;
 use App\Models\Fornecedor;
 
 class Item extends Model
@@ -46,5 +48,10 @@ class Item extends Model
         ];
 
         return $request->validate($regras, $feedbacks);
+    }
+
+    public function pedidos(): BelongsToMany
+    {
+        return $this->belongsToMany(Pedido::class, 'pedidos_produtos', 'produto_id', 'pedido_id');
     }
 }
