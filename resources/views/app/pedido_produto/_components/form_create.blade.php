@@ -11,5 +11,10 @@
         @endforeach
     </select>
 
+    <input type="number" name="quantidade" value="{{old('quantidade') ? old('quantidade') : ''}}" placeholder="Quantidade" class="borda-preta ">
+    @error('quantidade')
+        {{$message}}
+    @enderror
+
     <button type="submit">Cadastrar</button>
 </form>

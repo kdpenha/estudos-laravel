@@ -16,7 +16,7 @@ class Pedido extends Model
 
     public function produtos(): BelongsToMany
     {
-        return $this->belongsToMany(Item::class, 'pedidos_produtos', 'pedido_id', 'produto_id')->withPivot('created_at');
+        return $this->belongsToMany(Item::class, 'pedidos_produtos', 'pedido_id', 'produto_id')->withPivot('created_at', 'quantidade');
         /*
         1- modelo do relacionamento n pra n em relacao ao modelo que estamos implementando
         2- eh a table auxiliar que armazena os registros de relacionamento

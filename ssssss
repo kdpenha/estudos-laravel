@@ -1,0 +1,142 @@
+warning: in the working copy of 'resources/views/app/pedido_produto/_components/form_create.blade.php', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'resources/views/app/pedido_produto/create.blade.php', CRLF will be replaced by LF the next time Git touches it
+[1mdiff --git a/app/Http/Controllers/PedidoProdutoController.php b/app/Http/Controllers/PedidoProdutoController.php[m
+[1mindex 231757e..7775915 100644[m
+[1m--- a/app/Http/Controllers/PedidoProdutoController.php[m
+[1m+++ b/app/Http/Controllers/PedidoProdutoController.php[m
+[36m@@ -24,8 +24,6 @@[m [mpublic function create(Pedido $pedido)[m
+     {   [m
+         $produtos = Produto::all();[m
+         [m
+[31m-        $pedido->produtos; //eager loading[m
+[31m-        [m
+         return view('app.pedido_produto.create', ['pedido' => $pedido, 'produtos' => $produtos]);[m
+     }[m
+ [m
+[36m@@ -35,17 +33,23 @@[m [mpublic function create(Pedido $pedido)[m
+     public function store(Request $request, Pedido $pedido)[m
+     {   [m
+         $regras = [[m
+[31m-            'produto_id' => 'exists:produtos,id'[m
+[32m+[m[32m            'produto_id' => 'exists:produtos,id',[m
+[32m+[m[32m            'quantidade' => 'required'[m
+         ];[m
+         [m
+         $feedbacks = [[m
+[31m-            'exists' => 'O produto nao existe'[m
+[32m+[m[32m            'exists' => 'O produto nao existe',[m
+[32m+[m[32m            'required' => 'O campo :attribute deve possuir um valor valido'[m
+         ];[m
+ [m
+         $request->validate($regras, $feedbacks);[m
+ [m
+[31m-        PedidoProduto::create(['pedido_id' => $pedido->id, 'produto_id' => $request->input('produto_id')]);[m
+[31m-[m
+[32m+[m[32m        //$pedido->produtos; // resgata os registros do relacionamento[m
+[32m+[m[32m        $pedido->produtos()->attach([m
+[32m+[m[32m            $request->get('produto_id'),[m
+[32m+[m[32m            ['quantidade' => $request->get('quantidade')][m
+[32m+[m[32m        ); // torna um objeto[m
+[32m+[m[41m [m
+         return redirect()->route('pedido-produto.create', ['pedido' => $pedido->id]);[m
+     }[m
+ [m
+[36m@@ -76,8 +80,20 @@[m [mpublic function update(Request $request, string $id)[m
+     /**[m
+      * Remove the specified resource from storage.[m
+      */[m
+[31m-    public function destroy(string $id)[m
+[32m+[m[32m    public function destroy(Pedido $pedido, Produto $produto)[m
+     {[m
+[31m-        //[m
+[32m+[m[32m        //convencional[m
+[32m+[m[32m        /*[m
+[32m+[m[32m        PedidoProduto::where([[m
+[32m+[m[32m            'pedido_id' => $pedido->id,[m
+[32m+[m[32m            'produto_id' => $produto->id[m
+[32m+[m[32m        ])->delete();[m
+[32m+[m[32m        */[m
+[32m+[m
+[32m+[m[32m        //detach (delete pelo relacionamento)[m
+[32m+[m
+[32m+[m[32m        $pedido->produtos()->detach($produto->id);[m
+[32m+[m[41m    [m
+[32m+[m[32m        return redirect()->route('pedido-produto.create', ['pedido'=> $pedido->id]);[m
+     }[m
+ }[m
+[1mdiff --git a/app/Models/Pedido.php b/app/Models/Pedido.php[m
+[1mindex ea66481..bf22acf 100644[m
+[1m--- a/app/Models/Pedido.php[m
+[1m+++ b/app/Models/Pedido.php[m
+[36m@@ -16,7 +16,7 @@[m [mclass Pedido extends Model[m
+ [m
+     public function produtos(): BelongsToMany[m
+     {[m
+[31m-        return $this->belongsToMany(Item::class, 'pedidos_produtos', 'pedido_id', 'produto_id')->withPivot('created_at');[m
+[32m+[m[32m        return $this->belongsToMany(Item::class, 'pedidos_produtos', 'pedido_id', 'produto_id')->withPivot('created_at', 'quantidade');[m
+         /*[m
+         1- modelo do relacionamento n pra n em relacao ao modelo que estamos implementando[m
+         2- eh a table auxiliar que armazena os registros de relacionamento[m
+[1mdiff --git a/resources/views/app/pedido_produto/_components/form_create.blade.php b/resources/views/app/pedido_produto/_components/form_create.blade.php[m
+[1mindex 591e69e..a3b3a67 100644[m
+[1m--- a/resources/views/app/pedido_produto/_components/form_create.blade.php[m
+[1m+++ b/resources/views/app/pedido_produto/_components/form_create.blade.php[m
+[36m@@ -11,5 +11,10 @@[m
+         @endforeach[m
+     </select>[m
+ [m
+[32m+[m[32m    <input type="number" name="quantidade" value="{{old('quantidade') ? old('quantidade') : ''}}" placeholder="Quantidade" class="borda-preta ">[m
+[32m+[m[32m    @error('quantidade')[m
+[32m+[m[32m        {{$message}}[m
+[32m+[m[32m    @enderror[m
+[32m+[m
+     <button type="submit">Cadastrar</button>[m
+ </form>[m
+\ No newline at end of file[m
+[1mdiff --git a/resources/views/app/pedido_produto/create.blade.php b/resources/views/app/pedido_produto/create.blade.php[m
+[1mindex 297aa7b..2a08e42 100644[m
+[1m--- a/resources/views/app/pedido_produto/create.blade.php[m
+[1m+++ b/resources/views/app/pedido_produto/create.blade.php[m
+[36m@@ -31,21 +31,28 @@[m
+                             <th>ID</th>[m
+                             <th>Nome</th>[m
+                             <th>Data de inclusao do item no pedido</th>[m
+[32m+[m[32m                            <th></th>[m
+                         </tr>[m
+                     </thead>[m
+                     [m
+                     <tbody>[m
+[31m-                        @foreach ($produtos as $produto)[m
+[32m+[m[32m                        @foreach ($pedido->produtos as $produto)[m
+                         <tr>[m
+                             <td>{{$produto->id}}</td>[m
+                             <td>{{$produto->nome}}</td>[m
+                             <td>{{$produto->created_at->format('d/m/Y')}}</td>[m
+[32m+[m[32m                            <td>[m
+[32m+[m[32m                                <form action="{{route('pedido-produto.destroy', ['pedido'=> $pedido->id, 'produto' => $produto->id])}}" id="form_{{$pedido->id}}_{{$produto->id}}" method="post">[m
+[32m+[m[32m                                    @csrf[m
+[32m+[m[32m                                    @method('DELETE')[m
+[32m+[m[32m                                    <a href="#" onclick="document.getElementById('form_{{$pedido->id}}_{{$produto->id}}').submit()">Excluir</a>[m
+[32m+[m[32m                                </form>[m
+[32m+[m[32m                            </td>[m
+                         </tr>[m
+                         @endforeach[m
+                     </tbody>[m
+                 </table>[m
+ [m
+[31m-                {{$pedido}}[m
+                 @component('app.pedido_produto._components.form_create', ['pedido' => $pedido, 'produtos' => $produtos])[m
+                 @endcomponent[m
+             </div>[m
+[1mdiff --git a/routes/web.php b/routes/web.php[m
+[1mindex 33eb9fc..23c7734 100644[m
+[1m--- a/routes/web.php[m
+[1m+++ b/routes/web.php[m
+[36m@@ -57,6 +57,7 @@[m
+         //Route::resource('pedido-produto', App\Http\Controllers\PedidoProdutoController::class);[m
+         Route::get('pedido-produto/create/{pedido}', [App\Http\Controllers\PedidoProdutoController::class, 'create'])->name('pedido-produto.create');[m
+         Route::post('pedido-produto/store/{pedido}', [App\Http\Controllers\PedidoProdutoController::class, 'store'])->name('pedido-produto.store');[m
+[32m+[m[32m        Route::delete('pedido-produto/destroy/{pedido}/{produto}', [App\Http\Controllers\PedidoProdutoController::class, 'destroy'])->name('pedido-produto.destroy');[m
+ [m
+         }[m
+     );[m
