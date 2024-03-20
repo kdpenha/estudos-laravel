@@ -80,7 +80,7 @@ class PedidoProdutoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pedido $pedido, Produto $produto)
+    public function destroy(PedidoProduto $pedidoProduto, int $pedido_id)
     {
         //convencional
         /*
@@ -92,8 +92,10 @@ class PedidoProdutoController extends Controller
 
         //detach (delete pelo relacionamento)
 
-        $pedido->produtos()->detach($produto->id);
+        //$pedido_produto->produtos()->detach($produto->id);
     
-        return redirect()->route('pedido-produto.create', ['pedido'=> $pedido->id]);
+        $pedidoProduto->delete();
+
+        return redirect()->route('pedido-produto.create', ['pedido'=> $pedido_id]);
     }
 }

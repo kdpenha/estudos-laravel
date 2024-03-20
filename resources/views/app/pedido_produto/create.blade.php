@@ -40,12 +40,12 @@
                         <tr>
                             <td>{{$produto->id}}</td>
                             <td>{{$produto->nome}}</td>
-                            <td>{{$produto->created_at->format('d/m/Y')}}</td>
+                            <td>{{$produto->pivot->created_at->format('d/m/Y')}}</td>
                             <td>
-                                <form action="{{route('pedido-produto.destroy', ['pedido'=> $pedido->id, 'produto' => $produto->id])}}" id="form_{{$pedido->id}}_{{$produto->id}}" method="post">
+                                <form action="{{route('pedido-produto.destroy', ['pedidoProduto' => $produto->pivot->id, 'pedido_id' => $pedido->id])}}" id="form_{{$produto->pivot->id}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="#" onclick="document.getElementById('form_{{$pedido->id}}_{{$produto->id}}').submit()">Excluir</a>
+                                    <a href="#" onclick="document.getElementById('form_{{$produto->pivot->id}}').submit()">Excluir</a>
                                 </form>
                             </td>
                         </tr>
